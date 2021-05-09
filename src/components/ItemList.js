@@ -1,11 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-const ItemList = ({ id, onInputChange }) => {
+const ItemList = ({ id, onInputChange, type }) => {
   const [inputValue, setInputValue] = useState(0);
 
   useEffect(() => {
-    onInputChange(id, inputValue);
+    onInputChange(id, inputValue, type);
   }, [inputValue]);
 
   return (
