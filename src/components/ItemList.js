@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-const ItemList = ({ id, onInputChange, type }) => {
+const ItemList = ({ id, onInputChange, type, label }) => {
   const [inputValue, setInputValue] = useState(0);
 
   useEffect(() => {
@@ -12,8 +12,8 @@ const ItemList = ({ id, onInputChange, type }) => {
     <div>
       <h3>Title</h3>
       <div class="flex">
-        <div class="text-sm border border-2 rounded-l px-10 py-2 bg-gray-300 whitespace-nowrap">
-          <div></div>
+        <div class="flex justify-center content-center text-sm border border-2 rounded-l px-20 py-2 bg-gray-300 whitespace-nowrap w-2 ">
+          <div>{label}</div>
         </div>
         <input
           name="field_name"

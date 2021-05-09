@@ -1,5 +1,8 @@
 import ItemList from "./components/ItemList";
 import { useState, useEffect } from "react";
+import initialArray from "./data/initialArray";
+import IncomeTab from "./components/IncomeTab";
+import HousingExpenses from "./components/HousingExpenses";
 
 const values = "Monthly Wages";
 
@@ -9,67 +12,59 @@ function App() {
   const [expenses, setExpenses] = useState(0);
   const [incomes, setIncomes] = useState(0);
 
-  const [inputIncomes, setInputIncomes] = useState([0, 0, 0]);
+  const [inputIncomes, setInputIncomes] = useState(initialArray);
   const [inputExpenses, setInputExpenses] = useState([0, 0, 0]);
+
+  const [page, setPage] = useState("income");
 
   const income = "income";
   const expense = "expense";
 
   // Listen for income inputs change
   useEffect(() => {
-    setTotal(
-      parseInt(inputIncomes[0]) +
-        parseInt(inputIncomes[1]) -
-        parseInt(inputIncomes[2])
-    );
-    setIncomes(inputIncomes[0] + inputIncomes[1]);
-    setExpenses(parseInt(inputExpenses[0]) + parseInt(inputExpenses[1]));
+    setIncomes(inputIncomes[0].value + inputIncomes[1].value);
+
+    const calculateExpenses = () => {
+      let sum = 0;
+
+      inputIncomes.forEach((element) => {
+        if (element.type === "expense") {
+          sum = sum + element.value;
+        }
+      });
+      return parseInt(sum);
+    };
+
+    setExpenses(calculateExpenses());
   }, [inputIncomes, inputExpenses]);
 
-  // Listen for income/expense change to re-render totals
   useEffect(() => {
-    setTotal(incomes);
+    setTotal(incomes - expenses);
   }, [incomes, expenses]);
 
-  const onInputChange = (id, value, type) => {
-    if (type === "income") {
-      const incomesInput = inputIncomes.slice();
+  const onInputChange = (id, value, type, description) => {
+    const incomesInput = inputIncomes.slice();
 
-      value === ""
-        ? (incomesInput[id - 1] = parseInt(0))
-        : (incomesInput[id - 1] = parseInt(value));
+    value === ""
+      ? (incomesInput[id - 1].value = parseInt(0))
+      : (incomesInput[id - 1].value = parseInt(value));
 
-      console.log("initial array" + inputIncomes[0] + inputIncomes[1]);
+    incomesInput[id - 1].id = id;
 
-      console.log(id);
-      console.log(value);
+    console.log("initial array" + inputIncomes[0] + inputIncomes[1]);
 
-      console.log("copied array 1 = " + incomesInput[0]);
-      console.log("copied array 2 = " + incomesInput[1]);
+    console.log(id);
+    console.log(value);
 
-      console.log(inputIncomes[0]);
-      console.log(inputIncomes[1]);
+    console.log("copied array 1 = " + incomesInput[0]);
+    console.log("copied array 2 = " + incomesInput[1]);
 
-      console.log(incomesInput);
-      setInputIncomes(incomesInput);
-    } else {
-      const exp = inputExpenses.slice();
+    console.log(inputIncomes[0]);
+    console.log(inputIncomes[1]);
+    console.log(inputIncomes[2]);
 
-      value === ""
-        ? (exp[id - 1] = parseInt(0))
-        : (exp[id - 1] = parseInt(value));
-
-      console.log("initial array" + exp[0] + exp[1] + exp[2] + exp[3]);
-      console.log(exp);
-
-      console.log(id);
-      console.log(value);
-
-      console.log(exp[0]);
-      console.log(exp[1]);
-
-      setInputExpenses(exp);
-    }
+    console.log(incomesInput);
+    setInputIncomes(incomesInput);
   };
 
   return (
@@ -78,8 +73,10 @@ function App() {
       <div className="container mx-auto py-10 px-8 border">
         <div>
           <div className="main-header flex justify-center border-b">
-            <button>Click</button>
-            <button>Click</button>
+            <button onClick={() => setPage("income")}>Income</button>
+            <button onClick={() => setPage("housing-expenses")}>
+              Housing Expenses
+            </button>
             <button>Click</button>
             <button>Click</button>
           </div>
@@ -87,11 +84,22 @@ function App() {
         <div className="app-body">
           <h2>Income {incomes}</h2> Expenses: {expenses}
           <h3>TOTAL: {total}</h3>
-          <ItemList onInputChange={onInputChange} id={1} type={income} />
-          <ItemList onInputChange={onInputChange} id={2} type={income} />
+          <div className="mx-auto py-2 px-4 mb-5 border-b w-4/5"></div>
+          {page === "income" ? (
+            <IncomeTab
+              onInputChange={onInputChange}
+              income={income}
+              expense={expense}
+            />
+          ) : (
+            <HousingExpenses
+              onInputChange={onInputChange}
+              income={income}
+              expense={expense}
+            />
+          )}
+          <div></div>
         </div>
-        <p>ID 2 value {inputIncomes[1]}</p>
-        <ItemList onInputChange={onInputChange} id={3} type={income} />
       </div>
     </div>
   );
