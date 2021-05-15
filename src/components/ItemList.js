@@ -13,10 +13,10 @@ const ItemList = ({ id, onInputChange, type, label }) => {
 
   return (
     <div>
-      <h3>Title</h3>
-      <div class="flex">
+      <h3></h3>
+      <div class="flex mb-4">
         <div class="flex justify-center content-center text-sm border border-2 rounded-l px-20 py-2 bg-gray-300 whitespace-nowrap w-2 ">
-          <div>{label}</div>
+          <div className="">{label}</div>
         </div>
         <input
           name="field_name"
