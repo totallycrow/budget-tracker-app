@@ -113,8 +113,34 @@ function App() {
           </div>
         </div>
         <div className="app-body my-4">
-          <h2>Income {incomes}</h2> Expenses: {expenses}
-          <h3>TOTAL: {total}</h3>
+          <div className="flex justify-around md:block">
+            <div>
+              <h3>
+                Income: <span className="text-green-600">{incomes}</span> £
+              </h3>
+              <h3>
+                Expenses: <span className="text-red-600">{expenses}</span> £
+              </h3>
+            </div>
+            <div className="py-2">
+              <h3>
+                REMAINING:{" "}
+                <span
+                  className={
+                    total > 0
+                      ? "text-green-400"
+                      : total < 0
+                      ? "text-red-600"
+                      : ""
+                  }
+                >
+                  {total}
+                </span>{" "}
+                £
+              </h3>
+            </div>
+          </div>
+
           <div className="mx-auto py-2 px-4 mb-5 border-b w-4/5"></div>
           <div className={page !== "income" ? "hidden" : ""}>
             <IncomeTab
