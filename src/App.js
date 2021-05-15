@@ -9,6 +9,7 @@ import FoodExpenses from "./components/FoodExpenses";
 import SavingsExpenses from "./components/SavingsExpenses";
 
 const values = "Monthly Wages";
+const button = "px-2";
 
 function App() {
   // State of total
@@ -86,24 +87,32 @@ function App() {
     <div className="content-wrapper h-screen w-screen">
       <h1 className="px-12 py-4">Budget Tracker App</h1>
       <div className="container mx-auto py-10 px-8 border">
-        <div className="w-4/5 mx-auto">
-          <div className="main-header flex text-xs md:text-base justify-around  border-b ">
-            <button classname="" onClick={() => setPage("income")}>
+        <div className="md:w-4/5 mx-auto">
+          <div className="main-header flex text-xs md:text-base md:justify-around  border-b ">
+            <button className={button} onClick={() => setPage("income")}>
               Income
             </button>
-            <button onClick={() => setPage("housing-expenses")}>
+            <button
+              className={button}
+              onClick={() => setPage("housing-expenses")}
+            >
               Housing Expenses
             </button>
-            <button onClick={() => setPage("transportation-expenses")}>
+            <button
+              className={button}
+              onClick={() => setPage("transportation-expenses")}
+            >
               Transportation
             </button>
-            <button onClick={() => setPage("food-expenses")}>
+            <button className={button} onClick={() => setPage("food-expenses")}>
               Food & Personal
             </button>
-            <button onClick={() => setPage("savings")}>Savings</button>
+            <button className={button} onClick={() => setPage("savings")}>
+              Savings
+            </button>
           </div>
         </div>
-        <div className="app-body">
+        <div className="app-body my-4">
           <h2>Income {incomes}</h2> Expenses: {expenses}
           <h3>TOTAL: {total}</h3>
           <div className="mx-auto py-2 px-4 mb-5 border-b w-4/5"></div>

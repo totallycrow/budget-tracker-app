@@ -2,7 +2,7 @@
   "name": "budget-tracker",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://totallycrow.github.io/budget-tracker-app/",
+  
   "dependencies": {
     "@craco/craco": "^6.1.1",
     "@testing-library/jest-dom": "^5.11.10",
@@ -14,11 +14,11 @@
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.1"
   },
-  "scripts": {    
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "start:proxy": "REACT_APP_PROXY=true craco start",
-    "test": "react-scripts test",
+  "scripts": {
+    
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"    
   },
   "eslintConfig": {
