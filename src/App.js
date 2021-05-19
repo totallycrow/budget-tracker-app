@@ -1,4 +1,3 @@
-import ItemList from "./components/ItemList";
 import { useState, useEffect } from "react";
 import initialArray from "./data/initialArray";
 import IncomeTab from "./components/IncomeTab";
@@ -8,7 +7,6 @@ import TransportationExpenses from "./components/TransportationExpenses";
 import FoodExpenses from "./components/FoodExpenses";
 import SavingsExpenses from "./components/SavingsExpenses";
 
-const values = "Monthly Wages";
 const button = "px-2";
 
 function App() {
@@ -57,8 +55,8 @@ function App() {
     setTotal(incomes - expenses);
   }, [incomes, expenses]);
 
-  // ONINPUTCHANGE
-  const onInputChange = (id, value, type, description) => {
+  // OnInputChange definition
+  const onInputChange = (id, value) => {
     const incomesInput = inputIncomes.slice();
 
     value === ""
@@ -67,19 +65,6 @@ function App() {
 
     incomesInput[id - 1].id = id;
 
-    console.log("initial array" + inputIncomes[0] + inputIncomes[1]);
-
-    console.log(id);
-    console.log(value);
-
-    console.log("copied array 1 = " + incomesInput[0]);
-    console.log("copied array 2 = " + incomesInput[1]);
-
-    console.log(inputIncomes[0]);
-    console.log(inputIncomes[1]);
-    console.log(inputIncomes[2]);
-
-    console.log(incomesInput);
     setInputIncomes(incomesInput);
   };
 

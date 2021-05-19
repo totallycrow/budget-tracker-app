@@ -6,7 +6,7 @@ const HousingExpenses = ({onInputChange, expense}) => {
         <div>
              
             
-            {/* <p>ID 2 value {inputIncomes[1]}</p> */}
+            
             <ItemList onInputChange={onInputChange} id={3} type={expense} label={'Rent'}/>
             <ItemList onInputChange={onInputChange} id={4} type={expense} label={'Council Tax'}/>
             <ItemList onInputChange={onInputChange} id={24} type={expense} label={'Water Bills'}/>
