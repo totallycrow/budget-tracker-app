@@ -34,14 +34,14 @@ export default function InputCategory({
         </div>
       </div>
       <div className="flex items-center">
-        {/* <ItemList
+        <ItemList
           onInputChange={onInputChange}
           id={id}
           type={expense}
           description="Electricity Bills"
           values={values}
           setValues={setValues}
-        />{" "} */}
+        />{" "}
         <button className={showMenu === false ? "hidden" : "inline mb-4 px-8"}>
           -
         </button>

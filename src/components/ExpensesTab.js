@@ -8,18 +8,20 @@ export default function ExpensesTab({
   values,
   setValues,
 }) {
-  const [state, setState] = useState("lol2");
+  const [state, setState] = useState("test");
   const test = () => alert(state);
   return (
     <div>
       ExpensesTab
-      {/* <InputCategory
+      <InputCategory
         onInputChange={onInputChange}
-        id="1752"
+        id="1844"
         type="expense"
         values={values}
         setValues={setValues}
-      /> */}
+      />
+      {/*  */}
+      {/*  */}
       {/* <div>
         {values
           .filter((value) => value.type === "expense")

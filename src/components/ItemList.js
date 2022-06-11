@@ -2,8 +2,16 @@ import React from "react";
 import { useEffect, useState } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 
-const ItemList = ({ id, onInputChange, type, label, values, setValues }) => {
-  const [inputValue, setInputValue] = useState(label, 0);
+const ItemList = ({
+  id,
+  onInputChange,
+  type,
+  label,
+  values,
+  setValues,
+  description,
+}) => {
+  const [inputValue, setInputValue] = useState(0);
 
   // useEffect(() => {
   //   onInputChange(id, inputValue, type);
@@ -12,7 +20,19 @@ const ItemList = ({ id, onInputChange, type, label, values, setValues }) => {
   // }, [inputValue]);
 
   useEffect(() => {
-    let itemListValue = [{ ...values, id: id, value: inputValue }];
+    console.log(id);
+    console.log(inputValue);
+    let itemListValue = values.map((item) => {
+      if (item.id == id) {
+        // check if not empty
+        if (inputValue === "" || inputValue < 0) {
+          return { ...item, value: 0 };
+        } else return { ...item, value: parseInt(inputValue) };
+      }
+      return item;
+    });
+    console.log("LIST ITEM: ", itemListValue);
+
     setValues(itemListValue);
   }, [inputValue]);
 
@@ -22,7 +42,7 @@ const ItemList = ({ id, onInputChange, type, label, values, setValues }) => {
       <div className="flex">
         <div></div>
         <div className="flex justify-center content-center text-sm border border-2 rounded-l px-20 py-2 bg-gray-300 whitespace-nowrap w-2 ">
-          <div className="">{label}</div>
+          <div className="">{description}</div>
         </div>
         <input
           name="field_name"
