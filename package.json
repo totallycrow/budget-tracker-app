@@ -2,7 +2,6 @@
   "name": "budget-tracker",
   "version": "0.1.0",
   "private": true,
-  
   "dependencies": {
     "@craco/craco": "^6.1.1",
     "@testing-library/jest-dom": "^5.11.10",
@@ -15,11 +14,10 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"    
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
