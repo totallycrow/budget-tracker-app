@@ -1,5 +1,6 @@
 import React from 'react'
 import ItemList from './ItemList'
+import InputCategory from './InputCategory'
 
 const FoodExpenses = ({onInputChange, expense}) => {
     return (
@@ -12,6 +13,10 @@ const FoodExpenses = ({onInputChange, expense}) => {
             <ItemList onInputChange={onInputChange} id={15} type={expense} label={'Entertainment Subs.'}/>
             <ItemList onInputChange={onInputChange} id={16} type={expense} label={'Health Insurance'}/>
             <ItemList onInputChange={onInputChange} id={17} type={expense} label={'Other Personal Exp.'}/>
+
+            <InputCategory onInputChange={onInputChange} id={17} type={expense} label/>
+            <InputCategory onInputChange={onInputChange} id={17} type={expense} label/>
+            <InputCategory onInputChange={onInputChange} id={17} type={expense} label/>
         </div>
     )
 }
