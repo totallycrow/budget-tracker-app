@@ -8,12 +8,20 @@ import FoodExpenses from "./components/FoodExpenses";
 import SavingsExpenses from "./components/SavingsExpenses";
 import ExpensesTab from "./components/ExpensesTab";
 import ReportsTab from "./components/ReportsTab";
+import InputCategory from "./components/InputCategory";
+import budget from "./data/budget";
+
+
 
 const button = "px-2";
 
 function App() {
   // State of total
   const [total, setTotal] = useLocalStorage("total", 0);
+
+  const [test, setTest] = useLocalStorage("test", 0);
+
+  const [budgetSum, setBudgetSum] = useLocalStorage("budgetSum", budget[0])
 
   // State of sums of inputs
   const [expenses, setExpenses] = useLocalStorage("expenses", 0);
@@ -24,6 +32,13 @@ function App() {
     "inputIncomes",
     initialArray
   );
+  
+  useEffect(() => {
+    localStorage.setItem(`budgetSum`, JSON.stringify(budgetSum))
+  }, []);
+
+  // localStorage.setItem(`${label}`, `${inputValue}`)
+ 
 
   // const [inputExpenses, setInputExpenses] = useState([0, 0]);
 
@@ -36,14 +51,12 @@ function App() {
   ////****/ Listen for income inputs change
   // ** Update Income and Expenses labels
   
-  // TODO: Incomes hard-coded to first two values:
-  useEffect(() => {
-    
-    
-
+    useEffect(() => {
 
     const calculateSums = (inputType) => {
       let sum = 0;
+      let income = 0;
+      let expenses = 0;
 
       inputIncomes.forEach((element) => {
         if (element.type === "expense" && inputType === "expense") {
@@ -63,6 +76,7 @@ function App() {
     setTotal(incomes - expenses);
   }, [incomes, expenses]);
 
+//************************************************ */
   // OnInputChange definition
   const onInputChange = (id, value) => {
     const incomesInput = inputIncomes.slice();
@@ -75,6 +89,9 @@ function App() {
 
     setInputIncomes(incomesInput);
   };
+  //************************************************ */
+
+
 
   return (
     <div className="content-wrapper h-screen w-screen">
@@ -94,6 +111,7 @@ function App() {
             <button
               className={button}
               onClick={() => setPage("reports")}
+              
             >
               Reports
             </button>
@@ -109,10 +127,10 @@ function App() {
           <div className="flex justify-around md:block">
             <div>
               <h3>
-                Income: <span className="text-green-600">{incomes}</span> £
+                Income: <span className="text-green-600">{budgetSum.incomes}</span> £
               </h3>
               <h3>
-                Expenses: <span className="text-red-600">{expenses}</span> £
+                Expenses: <span className="text-red-600">{budgetSum.expenses}</span> £
               </h3>
             </div>
             <div className="py-2">
@@ -127,7 +145,7 @@ function App() {
                       : ""
                   }
                 >
-                  {total}
+                  {budgetSum.total}
                 </span>{" "}
                 £
               </h3>
@@ -144,7 +162,9 @@ function App() {
             />
           </div>
           <div className={page !== "expenses" ? "hidden" : ""}>
-            <ExpensesTab onInputChange={onInputChange} expense={expense} />
+            <ExpensesTab onInputChange={onInputChange} expense={expense}
+            values={inputIncomes}
+            setValues={setInputIncomes}/>
           </div>
           <div className={page !== "reports" ? "hidden" : ""}>
             <ReportsTab
@@ -158,6 +178,8 @@ function App() {
           <div className={page !== "savings" ? "hidden" : ""}>
             <SavingsExpenses onInputChange={onInputChange} expense={expense} />
           </div>
+
+          
           <div></div>
         </div>
       </div>
