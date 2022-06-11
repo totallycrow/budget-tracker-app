@@ -6,6 +6,8 @@ import useLocalStorage from "./hooks/useLocalStorage";
 import TransportationExpenses from "./components/TransportationExpenses";
 import FoodExpenses from "./components/FoodExpenses";
 import SavingsExpenses from "./components/SavingsExpenses";
+import ExpensesTab from "./components/ExpensesTab";
+import ReportsTab from "./components/ReportsTab";
 
 const button = "px-2";
 
@@ -23,7 +25,7 @@ function App() {
     initialArray
   );
 
-  const [inputExpenses, setInputExpenses] = useState([0, 0]);
+  // const [inputExpenses, setInputExpenses] = useState([0, 0]);
 
   // State of Current Page
   const [page, setPage] = useState("income");
@@ -31,24 +33,30 @@ function App() {
   const income = "income";
   const expense = "expense";
 
-  // Listen for income inputs change
-  // Update Income and Expenses labels
+  ////****/ Listen for income inputs change
+  // ** Update Income and Expenses labels
+  
+  // TODO: Incomes hard-coded to first two values:
   useEffect(() => {
-    setIncomes(inputIncomes[0].value + inputIncomes[1].value);
+    
+    
 
-    const calculateExpenses = () => {
+
+    const calculateSums = (inputType) => {
       let sum = 0;
 
       inputIncomes.forEach((element) => {
-        if (element.type === "expense") {
+        if (element.type === "expense" && inputType === "expense") {
           sum = sum + element.value;
-        }
+        } else if (element.type === "income" && inputType === "income") {
+          sum = sum + element.value;}
       });
       return parseInt(sum);
     };
-
-    setExpenses(calculateExpenses());
-  }, [inputIncomes, inputExpenses]);
+    
+    setIncomes(calculateSums("income"));
+    setExpenses(calculateSums("expense"));
+  }, [inputIncomes]);
 
   // Listen for incomes and expenses totals change and update total sum
   useEffect(() => {
@@ -79,15 +87,15 @@ function App() {
             </button>
             <button
               className={button}
-              onClick={() => setPage("housing-expenses")}
+              onClick={() => setPage("expenses")}
             >
-              Housing Expenses
+              Expenses
             </button>
             <button
               className={button}
-              onClick={() => setPage("transportation-expenses")}
+              onClick={() => setPage("reports")}
             >
-              Transportation
+              Reports
             </button>
             <button className={button} onClick={() => setPage("food-expenses")}>
               Food & Personal
@@ -135,11 +143,11 @@ function App() {
               fields={2}
             />
           </div>
-          <div className={page !== "housing-expenses" ? "hidden" : ""}>
-            <HousingExpenses onInputChange={onInputChange} expense={expense} />
+          <div className={page !== "expenses" ? "hidden" : ""}>
+            <ExpensesTab onInputChange={onInputChange} expense={expense} />
           </div>
-          <div className={page !== "transportation-expenses" ? "hidden" : ""}>
-            <TransportationExpenses
+          <div className={page !== "reports" ? "hidden" : ""}>
+            <ReportsTab
               onInputChange={onInputChange}
               expense={expense}
             />
