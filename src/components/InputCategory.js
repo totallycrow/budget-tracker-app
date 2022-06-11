@@ -8,6 +8,7 @@ export default function InputCategory({
   remove,
   values,
   setValues,
+  id,
 }) {
   const [showMenu, setShowMenu] = useState(false);
   const [editTitle, setEditTitle] = useState(false);
@@ -33,12 +34,14 @@ export default function InputCategory({
         </div>
       </div>
       <div className="flex items-center">
-        <ItemList
+        {/* <ItemList
           onInputChange={onInputChange}
-          id={25}
+          id={id}
           type={expense}
-          label={"Electricity Bills"}
-        />{" "}
+          description="Electricity Bills"
+          values={values}
+          setValues={setValues}
+        />{" "} */}
         <button className={showMenu === false ? "hidden" : "inline mb-4 px-8"}>
           -
         </button>

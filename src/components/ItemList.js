@@ -1,14 +1,19 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 
-const ItemList = ({ id, onInputChange, type, label }) => {
-  const [inputValue, setInputValue] = useLocalStorage(label, 0);
+const ItemList = ({ id, onInputChange, type, label, values, setValues }) => {
+  const [inputValue, setInputValue] = useState(label, 0);
+
+  // useEffect(() => {
+  //   onInputChange(id, inputValue, type);
+  //   // Set LocalStorage key-value pairs
+  //   localStorage.setItem(`${label}`, `${inputValue}`);
+  // }, [inputValue]);
 
   useEffect(() => {
-    onInputChange(id, inputValue, type);
-    // Set LocalStorage key-value pairs
-    localStorage.setItem(`${label}`, `${inputValue}`);
+    let itemListValue = [{ ...values, id: id, value: inputValue }];
+    setValues(itemListValue);
   }, [inputValue]);
 
   return (

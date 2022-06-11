@@ -4,7 +4,7 @@ import ItemList from './ItemList'
 const IncomeTab = ({onInputChange, income}) => {
     return (
         <div>
-             <ItemList
+             {/* <ItemList
               onInputChange={onInputChange}
               id={1}
               type={income}
@@ -15,7 +15,7 @@ const IncomeTab = ({onInputChange, income}) => {
               id={2}
               type={income}
               label={"Other Income"}
-            />
+            /> */}
             
         </div>
     )
