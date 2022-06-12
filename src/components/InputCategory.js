@@ -11,6 +11,7 @@ export default function InputCategory({
   id,
   description,
   listItems,
+  onClickAddCategory,
 }) {
   const [showMenu, setShowMenu] = useState(false);
   const [editTitle, setEditTitle] = useState(false);
@@ -18,9 +19,29 @@ export default function InputCategory({
 
   const toggleMenu = () => setShowMenu(!showMenu);
   console.log("INPUTS PROPS", listItems);
+
+  const onClickRemove = () => {
+    let filteredData = values.filter((elem) => elem.id !== id);
+    setValues(filteredData);
+    setShowMenu(false);
+  };
+
+  useEffect(() => {
+    let categoryNames = values.map((cat) => {
+      if (cat.id == id) {
+        cat.description = catName;
+      }
+      return cat;
+    });
+    setValues(categoryNames);
+  }, [catName]);
+
   return (
     <div>
-      <div onMouseEnter={toggleMenu} onMouseLeave={toggleMenu}>
+      <div
+        onMouseEnter={() => setShowMenu(true)}
+        onMouseLeave={() => setShowMenu(false)}
+      >
         <input
           value={catName}
           onChange={(e) => setCatName(e.target.value)}
@@ -32,8 +53,12 @@ export default function InputCategory({
         ></input>
 
         <div className={showMenu === false ? "hidden" : "inline"}>
-          <button className="inline m-auto px-2">Remove</button>
-          <button className="inline m-auto px-2">Add New</button>
+          <button onClick={onClickRemove} className="inline m-auto px-2">
+            Remove
+          </button>
+          <button onClick={onClickAddCategory} className="inline m-auto px-2">
+            Add New
+          </button>
         </div>
       </div>
       <div className="flex items-center">

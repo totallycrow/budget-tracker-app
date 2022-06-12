@@ -10,6 +10,21 @@ export default function ExpensesTab({
 }) {
   const [state, setState] = useState("test");
   const test = () => alert(state);
+
+  const collectionDisplay = values.filter((value) => value.type === "expense");
+
+  const onClickAddCategory = () => {
+    const newObject = {
+      id: collectionDisplay.length < 1 ? "0" : collectionDisplay.length,
+      type: "expense",
+      description: "Expense",
+      value: 0,
+      inputs: [{ id: "1844-1", title: "Gym", value: 20 }],
+    };
+    let addedData = [...values, newObject];
+    setValues(addedData);
+  };
+
   return (
     <div>
       ExpensesTab
@@ -24,24 +39,34 @@ export default function ExpensesTab({
       {/*  */}
       {/*  */}
       <div>
-        {values
-          .filter((value) => value.type === "expense")
-          .map((value) => (
-            <div key={value.id}>
-              <InputCategory
-                onInputChange={onInputChange}
-                id={value.id}
-                type={value.type}
-                remove={test}
-                values={values}
-                setValues={setValues}
-                expense={expense}
-                description={value.description}
-                listItems={value.inputs}
-                key={value.id}
-              />
-            </div>
-          ))}
+        {collectionDisplay.map((value) => (
+          <div key={value.id}>
+            <InputCategory
+              onInputChange={onInputChange}
+              id={value.id}
+              type={value.type}
+              remove={test}
+              values={values}
+              setValues={setValues}
+              expense={expense}
+              description={value.description}
+              listItems={value.inputs}
+              key={value.id}
+              onClickAddCategory={onClickAddCategory}
+            />
+          </div>
+        ))}
+      </div>
+      <div>
+        {collectionDisplay.length < 1 ? (
+          <button onClick={onClickAddCategory} className="inline m-auto px-2">
+            Add New
+          </button>
+        ) : (
+          ""
+        )}
+
+        {/* <button className="inline m-auto px-2">Add New</button> */}
       </div>
       {/* <div>
         <InputCategory
