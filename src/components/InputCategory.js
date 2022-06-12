@@ -70,7 +70,7 @@ export default function InputCategory({
               childId={input.id}
               childValue={input.value}
               type={expense}
-              description={input.title}
+              childTitle={input.title}
               values={values}
               setValues={setValues}
               key={input.id}

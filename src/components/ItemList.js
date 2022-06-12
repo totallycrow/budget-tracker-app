@@ -12,10 +12,13 @@ const ItemList = ({
   description,
   childId,
   childValue,
+  childTitle,
 }) => {
   const [inputValue, setInputValue] = useState(childValue);
   const [showMenu, setShowMenu] = useState(false);
   const toggleMenu = () => setShowMenu(!showMenu);
+  const [title, setTitle] = useState("Your Title");
+  const [inputTitle, setInputTitle] = useState(childTitle);
   let childKey;
 
   const onClickRemoveItem = () => {
@@ -30,7 +33,6 @@ const ItemList = ({
 
         input.inputs.forEach((subItem) => {
           if (subItem.id == childId) {
-            subItem.value = 666;
             let removeIndex = input.inputs.findIndex(
               (element) => element.id === childId
             );
@@ -46,7 +48,7 @@ const ItemList = ({
   };
 
   const onClickAddItem = () => {
-    const newObject = { id: "", title: "Your Title", value: 0 };
+    const newObject = { id: "", title: title, value: 0 };
 
     let updatedData = values.map((input) => {
       if (input.id !== id) {
@@ -64,6 +66,20 @@ const ItemList = ({
     });
     setValues(updatedData);
   };
+
+  useEffect(() => {
+    let childNames = values.map((elem) => {
+      if (elem.id == id) {
+        elem.inputs.forEach((subItem) => {
+          if (subItem.id == childId) {
+            subItem.title = inputTitle;
+          }
+        });
+      }
+      return elem;
+    });
+    setValues(childNames);
+  }, [inputTitle]);
 
   useEffect(() => {
     console.log("ITEMLIST COMPONENT START. ID: ", id);
@@ -132,8 +148,17 @@ const ItemList = ({
   return (
     <div className="mb-4" onMouseEnter={toggleMenu} onMouseLeave={toggleMenu}>
       <div className="flex">
-        <div className="flex justify-center content-center text-sm border border-2 rounded-l px-20 py-2 bg-gray-300 whitespace-nowrap w-2 ">
-          <div className="">{description}</div>
+        <div className="">
+          {/* <div className="flex justify-center content-center text-sm border border-2 rounded-l px-20 py-2 bg-gray-300 whitespace-nowrap w-2 "> */}
+          {/* <div className="">{description}</div> */}
+          <input
+            className=" border border-2 rounded-l px-2 py-2 bg-gray-300 whitespace-nowrap w-40"
+            type="text"
+            value={inputTitle}
+            onChange={(e) => {
+              setInputTitle(e.target.value);
+            }}
+          />
         </div>
         <div>
           {" "}
