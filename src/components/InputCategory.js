@@ -9,15 +9,18 @@ export default function InputCategory({
   values,
   setValues,
   id,
+  description,
+  listItems,
 }) {
   const [showMenu, setShowMenu] = useState(false);
   const [editTitle, setEditTitle] = useState(false);
-  const [catName, setCatName] = useState("Category Name");
+  const [catName, setCatName] = useState(description);
 
   const toggleMenu = () => setShowMenu(!showMenu);
+  console.log("INPUTS PROPS", listItems);
   return (
-    <div onMouseEnter={toggleMenu} onMouseLeave={toggleMenu}>
-      <div>
+    <div>
+      <div onMouseEnter={toggleMenu} onMouseLeave={toggleMenu}>
         <input
           value={catName}
           onChange={(e) => setCatName(e.target.value)}
@@ -34,20 +37,37 @@ export default function InputCategory({
         </div>
       </div>
       <div className="flex items-center">
-        <ItemList
+        <div>
+          {listItems.map((input) => (
+            <ItemList
+              onInputChange={onInputChange}
+              id={id}
+              childId={input.id}
+              childValue={input.value}
+              type={expense}
+              description={input.title}
+              values={values}
+              setValues={setValues}
+              key={input.id}
+            />
+          ))}
+        </div>
+
+        <div></div>
+        {/* <ItemList
           onInputChange={onInputChange}
           id={id}
           type={expense}
           description="Electricity Bills"
           values={values}
           setValues={setValues}
-        />{" "}
-        <button className={showMenu === false ? "hidden" : "inline mb-4 px-8"}>
+        />{" "} */}
+        {/* <button className={showMenu === false ? "hidden" : "inline mb-4 px-8"}>
           -
         </button>
         <button className={showMenu === false ? "hidden" : "inline mb-4 px-8"}>
           +
-        </button>
+        </button> */}
         <div>{console.log("VALUES", values)}</div>
       </div>
     </div>

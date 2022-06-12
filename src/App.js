@@ -62,7 +62,9 @@ function App() {
 
       inputIncomes.forEach((element) => {
         if (element.type === "expense") {
-          
+          element.inputs.forEach(subinput => {
+            expensesSum = expensesSum + subinput.value
+          })
           expensesSum = expensesSum + element.value
         } else if (element.type === "income") {
           incomesSum = incomesSum + element.value;}

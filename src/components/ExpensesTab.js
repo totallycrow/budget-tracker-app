@@ -13,21 +13,21 @@ export default function ExpensesTab({
   return (
     <div>
       ExpensesTab
-      <InputCategory
+      {/* <InputCategory
         onInputChange={onInputChange}
         id="1844"
         type="expense"
         values={values}
         setValues={setValues}
-      />
+        description={values[1].description}
+      /> */}
       {/*  */}
       {/*  */}
-      {/* <div>
+      <div>
         {values
           .filter((value) => value.type === "expense")
           .map((value) => (
             <div key={value.id}>
-              {value.id}
               <InputCategory
                 onInputChange={onInputChange}
                 id={value.id}
@@ -36,10 +36,13 @@ export default function ExpensesTab({
                 values={values}
                 setValues={setValues}
                 expense={expense}
+                description={value.description}
+                listItems={value.inputs}
+                key={value.id}
               />
             </div>
           ))}
-      </div> */}
+      </div>
       {/* <div>
         <InputCategory
           onInputChange={onInputChange}
