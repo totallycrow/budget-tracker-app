@@ -58,7 +58,7 @@ const ItemList = ({
         newObject.id =
           input.inputs.length < 1
             ? input.id + "-" + 0
-            : input.id + "-" + input.inputs.length;
+            : input.id + "-" + (input.inputs.length + 1);
         input.inputs = [...input.inputs, newObject];
       }
       console.log("FINAL ADD INPUT :", input);
