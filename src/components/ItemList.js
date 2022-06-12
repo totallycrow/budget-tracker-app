@@ -45,6 +45,26 @@ const ItemList = ({
     setValues(data);
   };
 
+  const onClickAddItem = () => {
+    const newObject = { id: "", title: "Your Title", value: 0 };
+
+    let updatedData = values.map((input) => {
+      if (input.id !== id) {
+        console.log(input);
+        return input;
+      } else {
+        newObject.id =
+          input.inputs.length < 1
+            ? input.id + "-" + 0
+            : input.id + "-" + input.inputs.length;
+        input.inputs = [...input.inputs, newObject];
+      }
+      console.log("FINAL ADD INPUT :", input);
+      return input;
+    });
+    setValues(updatedData);
+  };
+
   useEffect(() => {
     console.log("ITEMLIST COMPONENT START. ID: ", id);
     console.log("INPUT VALUE: ", inputValue);
@@ -130,7 +150,10 @@ const ItemList = ({
           >
             -
           </button>
-          <button className={showMenu === false ? "hidden" : "inline px-4"}>
+          <button
+            onClick={onClickAddItem}
+            className={showMenu === false ? "hidden" : "inline px-4"}
+          >
             +
           </button>
         </div>
