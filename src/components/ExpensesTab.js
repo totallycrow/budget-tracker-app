@@ -7,6 +7,7 @@ export default function ExpensesTab({
   expense,
   values,
   setValues,
+  idGenerator,
 }) {
   const [state, setState] = useState("test");
   const test = () => alert(state);
@@ -14,7 +15,7 @@ export default function ExpensesTab({
   const collectionDisplay = values.filter((value) => value.type === "expense");
 
   const onClickAddCategory = () => {
-    const parentId = values.length < 1 ? 0 : values.length + 1;
+    const parentId = idGenerator();
     const newObject = {
       id: parentId,
       type: "expense",

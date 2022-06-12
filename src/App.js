@@ -44,6 +44,39 @@ function App() {
 
   // const [inputExpenses, setInputExpenses] = useState([0, 0]);
 
+  const reset = () => {
+    
+    const state = [
+      { id: 0, type: "expense", description: "Bills", value: 0, 
+          inputs: [
+            {id: "0-1", title: "Gym", value: 20},
+            {id: "0-2", title: "Travel", value: 150},
+            {id: "0-3", title: "Phone", value: 66}] },  
+ 
+      { id: 1, type: "expense", description: "Entertainment", value: 0, 
+          inputs: [
+            {id: "1-1", title: "Netflix", value: 20},
+            {id: "1-2", title: "Games", value: 150},
+            ] },
+      { id: 2, type: "income", description: "Main Income", value: 0, 
+            inputs: [
+              {id: "2-1", title: "Work", value: 1500},
+              {id: "2-2", title: "Self-Employment", value: 500},
+              ] },
+      ]
+    state[0].id = idGenerator();
+    localStorage.setItem(`inputIncomes`, initialArray)
+    console.log("*************************STATE RESET: ", state)
+    setInputIncomes(state)
+  }
+
+  const idGenerator = () => {        
+
+      let numberId = Date.now().toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9*Math.pow(10, 12)).toString(36)  
+      console.log(numberId)
+      return numberId   
+  }
+
   // State of Current Page
   const [page, setPage] = useState("income");
 
@@ -58,16 +91,23 @@ function App() {
     const calculateSums = () => {
       let sum = 0;
       let incomesSum = 0;
-      let expensesSum = 0;      
+      let expensesSum = 0;
+
+      idGenerator(inputIncomes);
+
 
       inputIncomes.forEach((element) => {
         if (element.type === "expense") {
           element.inputs.forEach(subinput => {
             expensesSum = expensesSum + subinput.value
           })
-          expensesSum = expensesSum + element.value
+          
         } else if (element.type === "income") {
-          incomesSum = incomesSum + element.value;}
+          element.inputs.forEach(subinput => {
+            incomesSum = incomesSum + subinput.value;
+          })
+          // incomesSum = incomesSum + element.value;
+        }
       });
       // return parseInt(sum);
 
@@ -161,6 +201,7 @@ function App() {
                 £
               </h3>
             </div>
+            <button onClick={reset}>RESET</button>
           </div>
 
           <div className="mx-auto py-2 px-4 mb-5 border-b w-4/5"></div>
@@ -169,13 +210,17 @@ function App() {
               onInputChange={onInputChange}
               income={income}
               expense={expense}
-              fields={2}
+              
+              values={inputIncomes}
+              setValues={setInputIncomes}
+              idGenerator={idGenerator}
             />
           </div>
           <div className={page !== "expenses" ? "hidden" : ""}>
             <ExpensesTab onInputChange={onInputChange} expense={expense}
             values={inputIncomes}
-            setValues={setInputIncomes}/>
+            setValues={setInputIncomes}
+            idGenerator={idGenerator}/>
           </div>
           <div className={page !== "reports" ? "hidden" : ""}>
             <ReportsTab

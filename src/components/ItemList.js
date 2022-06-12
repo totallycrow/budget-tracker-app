@@ -17,7 +17,7 @@ const ItemList = ({
   const [inputValue, setInputValue] = useState(childValue);
   const [showMenu, setShowMenu] = useState(false);
   const toggleMenu = () => setShowMenu(!showMenu);
-  const [title, setTitle] = useState("Your Title");
+  // const [title, setTitle] = useState("Your Title");
   const [inputTitle, setInputTitle] = useState(childTitle);
   let childKey;
 
@@ -48,7 +48,7 @@ const ItemList = ({
   };
 
   const onClickAddItem = () => {
-    const newObject = { id: "", title: title, value: 0 };
+    const newObject = { id: "", title: "default", value: 0 };
 
     let updatedData = values.map((input) => {
       if (input.id !== id) {
