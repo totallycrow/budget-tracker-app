@@ -38,7 +38,7 @@ const initialArray = [
     // { id: 14, type: "expense", description: "exp", value: 0 },
     // { id: 15, type: "expense", description: "exp", value: 0 },
     // { id: 16, type: "expense", description: "exp", value: 0 },
-    { id: 1752, type: "income", description: "exp", value: 0 },
+    // { id: 1752, type: "income", description: "exp", value: 0, inputs:[] },
 // 
     { id: 1844, type: "expense", description: "Bills", value: 0, 
         inputs: [
@@ -47,7 +47,7 @@ const initialArray = [
           {id: "1844-3", title: "Phone", value: 66}] },
           
 // 
-    { id: 19123, type: "income", description: "exp", value: 0 },
+    // { id: 19123, type: "income", description: "exp", value: 0 },
     { id: 31849, type: "expense", description: "Entertainment", value: 0, 
         inputs: [
           {id: "31849-1", title: "Netflix", value: 20},

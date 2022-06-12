@@ -14,12 +14,13 @@ export default function ExpensesTab({
   const collectionDisplay = values.filter((value) => value.type === "expense");
 
   const onClickAddCategory = () => {
+    const parentId = values.length < 1 ? 0 : values.length + 1;
     const newObject = {
-      id: collectionDisplay.length < 1 ? "0" : collectionDisplay.length,
+      id: parentId,
       type: "expense",
       description: "Expense",
       value: 0,
-      inputs: [{ id: "1844-1", title: "Gym", value: 20 }],
+      inputs: [{ id: parentId + "-" + 1, title: "Gym", value: 20 }],
     };
     let addedData = [...values, newObject];
     setValues(addedData);

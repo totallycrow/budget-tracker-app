@@ -18,6 +18,33 @@ const ItemList = ({
   const toggleMenu = () => setShowMenu(!showMenu);
   let childKey;
 
+  const onClickRemoveItem = () => {
+    let data = values.map((input) => {
+      if (input.id !== id) {
+        console.log(input);
+        return input;
+      } else {
+        console.log("INPUT: ", input);
+        console.log("PROPS INPUT", id);
+        console.log("INPUT.ID", input.id);
+
+        input.inputs.forEach((subItem) => {
+          if (subItem.id == childId) {
+            subItem.value = 666;
+            let removeIndex = input.inputs.findIndex(
+              (element) => element.id === childId
+            );
+            alert(removeIndex);
+            input.inputs.splice(removeIndex, 1);
+          }
+        });
+      }
+      return input;
+    });
+    console.log("DATA: ", data);
+    setValues(data);
+  };
+
   useEffect(() => {
     console.log("ITEMLIST COMPONENT START. ID: ", id);
     console.log("INPUT VALUE: ", inputValue);
@@ -84,25 +111,29 @@ const ItemList = ({
 
   return (
     <div className="mb-4" onMouseEnter={toggleMenu} onMouseLeave={toggleMenu}>
-      <h3></h3>
       <div className="flex">
-        <div></div>
         <div className="flex justify-center content-center text-sm border border-2 rounded-l px-20 py-2 bg-gray-300 whitespace-nowrap w-2 ">
           <div className="">{description}</div>
         </div>
-        <input
-          name="field_name"
-          className="border border-2 rounded-r px-4 py-2"
-          type="number"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-        />
-        <button className={showMenu === false ? "hidden" : "inline px-4"}>
-          -
-        </button>
-        <button className={showMenu === false ? "hidden" : "inline px-4"}>
-          +
-        </button>
+        <div>
+          {" "}
+          <input
+            name="field_name"
+            className="border border-2 rounded-r px-4 py-2"
+            type="number"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+          />
+          <button
+            onClick={onClickRemoveItem}
+            className={showMenu === false ? "hidden" : "inline px-4"}
+          >
+            -
+          </button>
+          <button className={showMenu === false ? "hidden" : "inline px-4"}>
+            +
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -74,6 +74,7 @@ export default function InputCategory({
               values={values}
               setValues={setValues}
               key={input.id}
+              parentObject={input}
             />
           ))}
         </div>
