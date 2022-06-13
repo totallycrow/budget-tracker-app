@@ -1,14 +1,17 @@
-import React from 'react'
-import ItemList from './ItemList'
-import InputCategory from './InputCategory';
+import React from "react";
+import InputCategory from "./InputCategory";
 
-const IncomeTab = ({onInputChange, income, values, setValues, idGenerator}) => {
-
+const IncomeTab = ({
+  onInputChange,
+  income,
+  values,
+  setValues,
+  idGenerator,
+}) => {
   const collectionDisplay = values.filter((value) => value.type === "income");
 
   const onClickAddCategory = () => {
-
-    const parentId = idGenerator()
+    const parentId = idGenerator();
 
     const newObject = {
       id: parentId,
@@ -21,9 +24,9 @@ const IncomeTab = ({onInputChange, income, values, setValues, idGenerator}) => {
     setValues(addedData);
   };
 
-    return (
-        <div>
-             {/* <ItemList
+  return (
+    <div>
+      {/* <ItemList
               onInputChange={onInputChange}
               id={1}
               type={income}
@@ -36,17 +39,15 @@ const IncomeTab = ({onInputChange, income, values, setValues, idGenerator}) => {
               label={"Other Income"}
             /> */}
 
-<div>
+      <div>
         {collectionDisplay.map((value) => (
           <div key={value.id}>
             <InputCategory
               onInputChange={onInputChange}
               id={value.id}
               type={value.type}
-              
               values={values}
               setValues={setValues}
-              
               description={value.description}
               listItems={value.inputs}
               key={value.id}
@@ -66,9 +67,8 @@ const IncomeTab = ({onInputChange, income, values, setValues, idGenerator}) => {
 
         {/* <button className="inline m-auto px-2">Add New</button> */}
       </div>
-            
-        </div>
-    )
-}
+    </div>
+  );
+};
 
-export default IncomeTab
+export default IncomeTab;

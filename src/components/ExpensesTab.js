@@ -1,6 +1,5 @@
 import React from "react";
 import InputCategory from "./InputCategory";
-import { useState } from "react";
 
 export default function ExpensesTab({
   onInputChange,
@@ -9,9 +8,6 @@ export default function ExpensesTab({
   setValues,
   idGenerator,
 }) {
-  const [state, setState] = useState("test");
-  const test = () => alert(state);
-
   const collectionDisplay = values.filter((value) => value.type === "expense");
 
   const onClickAddCategory = () => {
@@ -47,7 +43,6 @@ export default function ExpensesTab({
               onInputChange={onInputChange}
               id={value.id}
               type={value.type}
-              remove={test}
               values={values}
               setValues={setValues}
               expense={expense}

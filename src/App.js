@@ -9,16 +9,7 @@ import budget from "./data/budget";
 const button = "px-2";
 
 function App() {
-  // State of total
-  const [total, setTotal] = useLocalStorage("total", 0);
-
-  const [test, setTest] = useLocalStorage("test", 0);
-
   const [budgetSum, setBudgetSum] = useLocalStorage("budgetSum", budget[0]);
-
-  // State of sums of inputs
-  const [expenses, setExpenses] = useLocalStorage("expenses", 0);
-  const [incomes, setIncomes] = useLocalStorage("incomes", 0);
 
   // State of Inputs
   const [inputIncomes, setInputIncomes] = useLocalStorage(

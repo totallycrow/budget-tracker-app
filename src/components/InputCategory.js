@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 export default function InputCategory({
   onInputChange,
   expense,
-  remove,
   values,
   setValues,
   id,
@@ -14,10 +13,9 @@ export default function InputCategory({
   onClickAddCategory,
 }) {
   const [showMenu, setShowMenu] = useState(false);
-  const [editTitle, setEditTitle] = useState(false);
   const [catName, setCatName] = useState(description);
 
-  const toggleMenu = () => setShowMenu(!showMenu);
+  // const toggleMenu = () => setShowMenu(!showMenu);
   console.log("INPUTS PROPS", listItems);
 
   const onClickRemove = () => {

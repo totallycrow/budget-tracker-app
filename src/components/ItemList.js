@@ -1,6 +1,5 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import useLocalStorage from "../hooks/useLocalStorage";
 
 const ItemList = ({
   id,
