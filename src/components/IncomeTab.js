@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import InputCategory from "./InputCategory";
 
 const IncomeTab = ({
@@ -8,7 +8,9 @@ const IncomeTab = ({
   setValues,
   idGenerator,
 }) => {
+
   const collectionDisplay = values.filter((value) => value.type === "income");
+  
 
   const onClickAddCategory = () => {
     const parentId = idGenerator();

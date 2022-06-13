@@ -17,13 +17,13 @@ function App() {
     initialArray
   );
 
-  useEffect(() => {
-    localStorage.setItem(`budgetSum`, JSON.stringify(budgetSum));
-  }, []);
+  // useEffect(() => {
+  //   localStorage.setItem(`budgetSum`, JSON.stringify(budgetSum));
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem(`inputIncomes`, JSON.stringify(inputIncomes));
-  }, []);
+  // useEffect(() => {
+  //   localStorage.setItem(`inputIncomes`, JSON.stringify(inputIncomes));
+  // }, []);
 
   // localStorage.setItem(`${label}`, `${inputValue}`)
 
@@ -65,7 +65,7 @@ function App() {
       },
     ];
     state[0].id = idGenerator();
-    localStorage.setItem(`inputIncomes`, initialArray);
+    localStorage.setItem(`inputIncomes`, state);
     console.log("*************************STATE RESET: ", state);
     setInputIncomes(state);
   };
@@ -91,7 +91,7 @@ function App() {
 
   useEffect(() => {
     const calculateSums = () => {
-      let sum = 0;
+      
       let incomesSum = 0;
       let expensesSum = 0;
 
@@ -109,8 +109,7 @@ function App() {
       });
       // return parseInt(sum);
 
-      let budgetValues = {
-        ...budgetSum,
+      let budgetValues = {        
         incomes: incomesSum,
         expenses: expensesSum,
       };
@@ -121,6 +120,7 @@ function App() {
     // setExpenses(calculateSums("expense"));
 
     calculateSums();
+    // eslint-disable-next-line react-hooks/exhaustive-deps    
   }, [inputIncomes]);
 
   // Listen for incomes and expenses totals change and update total sum

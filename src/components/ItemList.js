@@ -19,6 +19,11 @@ const ItemList = ({
   // const [title, setTitle] = useState("Your Title");
   const [inputTitle, setInputTitle] = useState(childTitle);
   let childKey;
+  
+  useEffect(() => {
+    setInputValue(childValue) 
+    setInputTitle(childTitle)   
+  }, [values])
 
   const onClickRemoveItem = () => {
     let data = values.map((input) => {

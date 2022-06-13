@@ -15,6 +15,10 @@ export default function InputCategory({
   const [showMenu, setShowMenu] = useState(false);
   const [catName, setCatName] = useState(description);
 
+  useEffect(() => {
+   setCatName(description)   
+  }, [values])
+
   // const toggleMenu = () => setShowMenu(!showMenu);
   console.log("INPUTS PROPS", listItems);
 
