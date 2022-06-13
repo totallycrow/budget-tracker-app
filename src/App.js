@@ -19,7 +19,7 @@ function App() {
 
   const [test, setTest] = useLocalStorage("test", 0);
 
-  const [budgetSum, setBudgetSum] = useLocalStorage("budgetSum", budget[0])
+  const [budgetSum, setBudgetSum] = useLocalStorage("budgetSum", budget[0]);
 
   // State of sums of inputs
   const [expenses, setExpenses] = useLocalStorage("expenses", 0);
@@ -30,52 +30,69 @@ function App() {
     "inputIncomes",
     initialArray
   );
-  
+
   useEffect(() => {
-    localStorage.setItem(`budgetSum`, JSON.stringify(budgetSum))
+    localStorage.setItem(`budgetSum`, JSON.stringify(budgetSum));
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(`inputIncomes`, JSON.stringify(inputIncomes))
+    localStorage.setItem(`inputIncomes`, JSON.stringify(inputIncomes));
   }, []);
 
   // localStorage.setItem(`${label}`, `${inputValue}`)
- 
 
   // const [inputExpenses, setInputExpenses] = useState([0, 0]);
 
   const reset = () => {
-    
     const state = [
-      { id: 0, type: "expense", description: "Bills", value: 0, 
-          inputs: [
-            {id: "0-1", title: "Gym", value: 20},
-            {id: "0-2", title: "Travel", value: 150},
-            {id: "0-3", title: "Phone", value: 66}] },  
- 
-      { id: 1, type: "expense", description: "Entertainment", value: 0, 
-          inputs: [
-            {id: "1-1", title: "Netflix", value: 20},
-            {id: "1-2", title: "Games", value: 150},
-            ] },
-      { id: 2, type: "income", description: "Main Income", value: 0, 
-            inputs: [
-              {id: "2-1", title: "Work", value: 1500},
-              {id: "2-2", title: "Self-Employment", value: 500},
-              ] },
-      ]
+      {
+        id: 0,
+        type: "expense",
+        description: "Bills",
+        value: 0,
+        inputs: [
+          { id: "0-1", title: "Gym", value: 20 },
+          { id: "0-2", title: "Travel", value: 150 },
+          { id: "0-3", title: "Phone", value: 66 },
+        ],
+      },
+
+      {
+        id: 1,
+        type: "expense",
+        description: "Entertainment",
+        value: 0,
+        inputs: [
+          { id: "1-1", title: "Netflix", value: 20 },
+          { id: "1-2", title: "Games", value: 150 },
+        ],
+      },
+      {
+        id: 2,
+        type: "income",
+        description: "Main Income",
+        value: 0,
+        inputs: [
+          { id: "2-1", title: "Work", value: 1500 },
+          { id: "2-2", title: "Self-Employment", value: 500 },
+        ],
+      },
+    ];
     state[0].id = idGenerator();
-    localStorage.setItem(`inputIncomes`, initialArray)
-    console.log("*************************STATE RESET: ", state)
-    setInputIncomes(state)
-  }
+    localStorage.setItem(`inputIncomes`, initialArray);
+    console.log("*************************STATE RESET: ", state);
+    setInputIncomes(state);
+  };
 
-  const idGenerator = () => {        
-
-      let numberId = Date.now().toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9*Math.pow(10, 12)).toString(36)  
-      console.log(numberId)
-      return numberId   
-  }
+  const idGenerator = () => {
+    let numberId =
+      Date.now().toString(36) +
+      Math.floor(
+        Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12)
+      ).toString(36);
+    console.log(numberId);
+    return numberId;
+  };
 
   // State of Current Page
   const [page, setPage] = useState("income");
@@ -85,41 +102,39 @@ function App() {
 
   ////****/ Listen for income inputs change
   // ** Update Income and Expenses labels
-  
-    useEffect(() => {
 
+  useEffect(() => {
     const calculateSums = () => {
       let sum = 0;
       let incomesSum = 0;
       let expensesSum = 0;
 
-      idGenerator(inputIncomes);
-
-
       inputIncomes.forEach((element) => {
         if (element.type === "expense") {
-          element.inputs.forEach(subinput => {
-            expensesSum = expensesSum + subinput.value
-          })
-          
+          element.inputs.forEach((subinput) => {
+            expensesSum = expensesSum + subinput.value;
+          });
         } else if (element.type === "income") {
-          element.inputs.forEach(subinput => {
+          element.inputs.forEach((subinput) => {
             incomesSum = incomesSum + subinput.value;
-          })
+          });
           // incomesSum = incomesSum + element.value;
         }
       });
       // return parseInt(sum);
 
-      let budgetValues = {...budgetSum, incomes: incomesSum, expenses: expensesSum}
-    setBudgetSum(budgetValues)
+      let budgetValues = {
+        ...budgetSum,
+        incomes: incomesSum,
+        expenses: expensesSum,
+      };
+      setBudgetSum(budgetValues);
     };
-    
+
     // setIncomes(calculateSums("income"));
     // setExpenses(calculateSums("expense"));
 
-    calculateSums();   
-
+    calculateSums();
   }, [inputIncomes]);
 
   // Listen for incomes and expenses totals change and update total sum
@@ -127,7 +142,7 @@ function App() {
   //   setTotal(incomes - expenses);
   // }, [incomes, expenses]);
 
-//************************************************ */
+  //************************************************ */
   // OnInputChange definition
   const onInputChange = (id, value) => {
     const incomesInput = inputIncomes.slice();
@@ -142,8 +157,6 @@ function App() {
   };
   //************************************************ */
 
-
-
   return (
     <div className="content-wrapper h-screen w-screen">
       <h1 className="px-12 py-4">Budget Tracker App</h1>
@@ -153,17 +166,10 @@ function App() {
             <button className={button} onClick={() => setPage("income")}>
               Income
             </button>
-            <button
-              className={button}
-              onClick={() => setPage("expenses")}
-            >
+            <button className={button} onClick={() => setPage("expenses")}>
               Expenses
             </button>
-            <button
-              className={button}
-              onClick={() => setPage("reports")}
-              
-            >
+            <button className={button} onClick={() => setPage("reports")}>
               Reports
             </button>
             {/* <button className={button} onClick={() => setPage("food-expenses")}>
@@ -178,10 +184,12 @@ function App() {
           <div className="flex justify-around md:block">
             <div>
               <h3>
-                Income: <span className="text-green-600">{budgetSum.incomes}</span> £
+                Income:{" "}
+                <span className="text-green-600">{budgetSum.incomes}</span> £
               </h3>
               <h3>
-                Expenses: <span className="text-red-600">{budgetSum.expenses}</span> £
+                Expenses:{" "}
+                <span className="text-red-600">{budgetSum.expenses}</span> £
               </h3>
             </div>
             <div className="py-2">
@@ -210,22 +218,26 @@ function App() {
               onInputChange={onInputChange}
               income={income}
               expense={expense}
-              
               values={inputIncomes}
               setValues={setInputIncomes}
               idGenerator={idGenerator}
             />
           </div>
           <div className={page !== "expenses" ? "hidden" : ""}>
-            <ExpensesTab onInputChange={onInputChange} expense={expense}
-            values={inputIncomes}
-            setValues={setInputIncomes}
-            idGenerator={idGenerator}/>
+            <ExpensesTab
+              onInputChange={onInputChange}
+              expense={expense}
+              values={inputIncomes}
+              setValues={setInputIncomes}
+              idGenerator={idGenerator}
+            />
           </div>
           <div className={page !== "reports" ? "hidden" : ""}>
             <ReportsTab
               onInputChange={onInputChange}
               expense={expense}
+              values={inputIncomes}
+              budgetSum={budgetSum}
             />
           </div>
           {/* <div className={page !== "food-expenses" ? "hidden" : ""}>
@@ -235,7 +247,6 @@ function App() {
             <SavingsExpenses onInputChange={onInputChange} expense={expense} />
           </div> */}
 
-          
           <div></div>
         </div>
       </div>
