@@ -1,14 +1,9 @@
 import { useState, useEffect } from "react";
 import initialArray from "./data/initialArray";
 import IncomeTab from "./components/IncomeTab";
-import HousingExpenses from "./components/HousingExpenses";
 import useLocalStorage from "./hooks/useLocalStorage";
-import TransportationExpenses from "./components/TransportationExpenses";
-import FoodExpenses from "./components/FoodExpenses";
-import SavingsExpenses from "./components/SavingsExpenses";
 import ExpensesTab from "./components/ExpensesTab";
 import ReportsTab from "./components/ReportsTab";
-import InputCategory from "./components/InputCategory";
 import budget from "./data/budget";
 
 const button = "px-2";

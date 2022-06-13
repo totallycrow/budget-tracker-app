@@ -4,7 +4,6 @@ import Chart from "./Chart";
 export default function ReportsTab({ values, budgetSum }) {
   const [expenses, setExpenses] = useState([]);
   const [expensesLabelTitle, setExpensesLabelTitle] = useState([]);
-  const [incomes, setIncomes] = useState([]);
   const [budget, SetBudget] = useState(budgetSum);
 
   useEffect(() => {
