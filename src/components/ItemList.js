@@ -29,7 +29,7 @@ const ItemList = ({
         input.inputs.forEach((subItem) => {
           if (String(subItem.id) === String(childId)) {
             let removeIndex = input.inputs.findIndex(
-              (element) => element.id === childId
+              (element) => String(element.id) === String(childId)
             );
             alert(removeIndex);
             input.inputs.splice(removeIndex, 1);
@@ -81,7 +81,7 @@ const ItemList = ({
 
         item.inputs.forEach((subItem) => { 
 
-          if (subItem.id === childId) {           
+          if (String(subItem.id) === String(childId)) {           
             if (inputValue !== "" && inputValue > 0) {
               subItem.value = parseInt(inputValue);
             } else {
