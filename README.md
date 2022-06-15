@@ -14,4 +14,4 @@ Clone the repo and run "npm i" to install the dependencies, then run "npm start"
 
 ## Live Demo
 
-To see the App live, visit: https://xenodochial-jennings-dcdb02.netlify.app
+To see the App live, visit: https://react-budgetvisualizer.netlify.app/
