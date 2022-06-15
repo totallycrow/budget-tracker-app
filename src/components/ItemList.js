@@ -3,12 +3,8 @@ import { useEffect, useState } from "react";
 
 const ItemList = ({
   id,
-  onInputChange,
-  type,
-  label,
   values,
-  setValues,
-  description,
+  setValues,  
   childId,
   childValue,
   childTitle,
@@ -16,9 +12,7 @@ const ItemList = ({
   const [inputValue, setInputValue] = useState(childValue);
   const [showMenu, setShowMenu] = useState(false);
   const toggleMenu = () => setShowMenu(!showMenu);
-  // const [title, setTitle] = useState("Your Title");
   const [inputTitle, setInputTitle] = useState(childTitle);
-  let childKey;
   
   useEffect(() => {
     setInputValue(childValue) 
@@ -28,15 +22,12 @@ const ItemList = ({
   const onClickRemoveItem = () => {
     let data = values.map((input) => {
       if (input.id !== id) {
-        console.log(input);
+        
         return input;
       } else {
-        console.log("INPUT: ", input);
-        console.log("PROPS INPUT", id);
-        console.log("INPUT.ID", input.id);
 
         input.inputs.forEach((subItem) => {
-          if (subItem.id == childId) {
+          if (String(subItem.id) === String(childId)) {
             let removeIndex = input.inputs.findIndex(
               (element) => element.id === childId
             );
@@ -46,8 +37,7 @@ const ItemList = ({
         });
       }
       return input;
-    });
-    console.log("DATA: ", data);
+    });    
     setValues(data);
   };
 
@@ -55,8 +45,7 @@ const ItemList = ({
     const newObject = { id: "", title: "default", value: 0 };
 
     let updatedData = values.map((input) => {
-      if (input.id !== id) {
-        console.log(input);
+      if (input.id !== id) {        
         return input;
       } else {
         newObject.id =
@@ -64,8 +53,7 @@ const ItemList = ({
             ? input.id + "-" + 0
             : input.id + "-" + (input.inputs.length + 1);
         input.inputs = [...input.inputs, newObject];
-      }
-      console.log("FINAL ADD INPUT :", input);
+      }     
       return input;
     });
     setValues(updatedData);
@@ -73,9 +61,9 @@ const ItemList = ({
 
   useEffect(() => {
     let childNames = values.map((elem) => {
-      if (elem.id == id) {
+      if (String(elem.id) === String(id)) {
         elem.inputs.forEach((subItem) => {
-          if (subItem.id == childId) {
+          if (String(subItem.id) === String(childId)) {
             subItem.title = inputTitle;
           }
         });
@@ -86,22 +74,14 @@ const ItemList = ({
   }, [inputTitle]);
 
   useEffect(() => {
-    console.log("ITEMLIST COMPONENT START. ID: ", id);
-    console.log("INPUT VALUE: ", inputValue);
-    console.log("CHILD VALUE: ", childValue);
 
-    let itemListValue = values.map((item) => {
-      console.log("FIRST LOOP / ITEM: ", item);
+    let itemListValue = values.map((item) => {     
 
-      if (item.id == id) {
-        console.log("FIRST LOOP / ITEM CHECK: ", item);
+      if (item.id === id) {       
 
-        item.inputs.forEach((subItem) => {
-          // console.log("SUBITEM: ", subItem);
-          childKey = subItem.id;
+        item.inputs.forEach((subItem) => { 
 
-          if (subItem.id == childId) {
-            console.log("SUBITEM: ", subItem);
+          if (subItem.id === childId) {           
             if (inputValue !== "" && inputValue > 0) {
               subItem.value = parseInt(inputValue);
             } else {
@@ -109,52 +89,16 @@ const ItemList = ({
             }
           }
         });
-      }
-      // Default case, return initial object
-      return item;
-      // Update the state
-    });
-    console.log("BEFORE SETSTATE / ITEMLISTVALUE: ", itemListValue);
+      }      
+      return item;      
+    });   
     setValues(itemListValue);
   }, [inputValue]);
-
-  // useEffect(() => {
-  //   console.log(id);
-  //   console.log(inputValue);
-  //   let itemListValue = values.map((item) => {
-  //     if (item.id == id) {
-  //       console.log("ITEM:", item);
-  //       item.inputs.forEach((subItem) => {
-  //         console.log("SUBITEM:", subItem);
-  //         console.log(subItem.id);
-  //         console.log(childId);
-  //         if (subItem.id == childId) {
-  //           let result = { ...subItem, value: parseInt(inputValue) };
-  //           console.log("INPUTVALUE: ", inputValue);
-  //           console.log("RESULT: ", result);
-
-  //           return result;
-  //         }
-  //       });
-
-  //       // check if not empty
-  //       if (inputValue === "" || inputValue < 0) {
-  //         return { ...item, value: 0 };
-  //       } else return { ...item, value: parseInt(inputValue) };
-  //     }
-  //     return item;
-  //   });
-  //   console.log("LIST ITEM: ", itemListValue);
-
-  //   setValues(itemListValue);
-  // }, [inputValue]);
 
   return (
     <div className="mb-4" onMouseEnter={toggleMenu} onMouseLeave={toggleMenu}>
       <div className="flex">
         <div className="">
-          {/* <div className="flex justify-center content-center text-sm border border-2 rounded-l px-20 py-2 bg-gray-300 whitespace-nowrap w-2 "> */}
-          {/* <div className="">{description}</div> */}
           <input
             className=" border border-2 rounded-l px-2 py-2 bg-gray-300 whitespace-nowrap w-40"
             type="text"

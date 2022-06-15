@@ -17,7 +17,7 @@ export default function ExpensesTab({
       type: "expense",
       description: "Expense",
       value: 0,
-      inputs: [{ id: parentId + "-" + 1, title: "Gym", value: 20 }],
+      inputs: [{ id: parentId + "-" + 1, title: "Your Expense", value: 20 }],
     };
     let addedData = [...values, newObject];
     setValues(addedData);
@@ -26,16 +26,6 @@ export default function ExpensesTab({
   return (
     <div>
       ExpensesTab
-      {/* <InputCategory
-        onInputChange={onInputChange}
-        id="1844"
-        type="expense"
-        values={values}
-        setValues={setValues}
-        description={values[1].description}
-      /> */}
-      {/*  */}
-      {/*  */}
       <div>
         {collectionDisplay.map((value) => (
           <div key={value.id}>
@@ -62,19 +52,7 @@ export default function ExpensesTab({
         ) : (
           ""
         )}
-
-        {/* <button className="inline m-auto px-2">Add New</button> */}
       </div>
-      {/* <div>
-        <InputCategory
-          onInputChange={onInputChange}
-          id={17}
-          type={expense}
-          remove={test}
-          values={values}
-          setValues={setValues}
-        />
-      </div> */}
     </div>
   );
 }

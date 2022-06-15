@@ -1,16 +1,13 @@
-import { useState } from "react";
 import InputCategory from "./InputCategory";
 
 const IncomeTab = ({
-  onInputChange,
-  income,
+  onInputChange,  
   values,
   setValues,
   idGenerator,
 }) => {
 
-  const collectionDisplay = values.filter((value) => value.type === "income");
-  
+  const collectionDisplay = values.filter((value) => value.type === "income");  
 
   const onClickAddCategory = () => {
     const parentId = idGenerator();
@@ -20,7 +17,7 @@ const IncomeTab = ({
       type: "income",
       description: "Income",
       value: 0,
-      inputs: [{ id: parentId + "-" + 1, title: "Gym", value: 20 }],
+      inputs: [{ id: parentId + "-" + 1, title: "Your Income", value: 20 }],
     };
     let addedData = [...values, newObject];
     setValues(addedData);
@@ -28,19 +25,6 @@ const IncomeTab = ({
 
   return (
     <div>
-      {/* <ItemList
-              onInputChange={onInputChange}
-              id={1}
-              type={income}
-              label={"Salary"}
-            />
-            <ItemList
-              onInputChange={onInputChange}
-              id={2}
-              type={income}
-              label={"Other Income"}
-            /> */}
-
       <div>
         {collectionDisplay.map((value) => (
           <div key={value.id}>
@@ -66,8 +50,6 @@ const IncomeTab = ({
         ) : (
           ""
         )}
-
-        {/* <button className="inline m-auto px-2">Add New</button> */}
       </div>
     </div>
   );
