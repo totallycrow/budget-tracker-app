@@ -114,6 +114,7 @@ export default function ReportsTab({ values, budgetSum }) {
     let expensesTitleArray = [];
     values.forEach((element) => {
       if (element.type === "expense") {
+        console.log("ELEMENT TYPE", element.type)
         element.inputs.forEach((subinput) => {
           expensesArray.push(subinput.value);
           expensesTitleArray.push(subinput.title);
@@ -122,7 +123,7 @@ export default function ReportsTab({ values, budgetSum }) {
         element.inputs.forEach((subinput) => {
           //   expensesArray.push(subinput.value);
           incomesArray.push(subinput.value);
-          expensesTitleArray.push(subinput.title);
+          // expensesTitleArray.push(subinput.title);
         });
         // incomesSum = incomesSum + element.value;
       }
