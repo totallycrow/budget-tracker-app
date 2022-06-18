@@ -19,7 +19,7 @@ export default function InputCategory({
    setCatName(description)   
   }, [values])
 
-  // const toggleMenu = () => setShowMenu(!showMenu);  
+  
 
   const onClickRemove = () => {
     let filteredData = values.filter((elem) => elem.id !== id);
@@ -29,7 +29,7 @@ export default function InputCategory({
 
   useEffect(() => {
     let categoryNames = values.map((cat) => {
-      if (parseInt(cat.id) === parseInt(id)) {
+      if (cat.id == id) {
         cat.description = catName;
       }
       return cat;
@@ -80,7 +80,7 @@ export default function InputCategory({
           ))}
         </div>
 
-        <div></div>        
+        <div></div>       
       </div>
     </div>
   );
