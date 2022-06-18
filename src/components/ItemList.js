@@ -30,8 +30,7 @@ const ItemList = ({
           if (String(subItem.id) === String(childId)) {
             let removeIndex = input.inputs.findIndex(
               (element) => String(element.id) === String(childId)
-            );
-            alert(removeIndex);
+            );            
             input.inputs.splice(removeIndex, 1);
           }
         });
