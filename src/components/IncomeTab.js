@@ -1,9 +1,7 @@
-import { useState } from "react";
 import InputCategory from "./InputCategory";
 
 const IncomeTab = ({
-  onInputChange,
-  income,
+  onInputChange,  
   values,
   setValues,
   idGenerator,
@@ -28,18 +26,6 @@ const IncomeTab = ({
 
   return (
     <div>
-      {/* <ItemList
-              onInputChange={onInputChange}
-              id={1}
-              type={income}
-              label={"Salary"}
-            />
-            <ItemList
-              onInputChange={onInputChange}
-              id={2}
-              type={income}
-              label={"Other Income"}
-            /> */}
 
       <div>
         {collectionDisplay.map((value) => (
@@ -67,7 +53,7 @@ const IncomeTab = ({
           ""
         )}
 
-        {/* <button className="inline m-auto px-2">Add New</button> */}
+     
       </div>
     </div>
   );

@@ -11,8 +11,7 @@ const ItemList = ({
 }) => {
   const [inputValue, setInputValue] = useState(childValue);
   const [showMenu, setShowMenu] = useState(false);
-  const toggleMenu = () => setShowMenu(!showMenu);
-  // const [title, setTitle] = useState("Your Title");
+  const toggleMenu = () => setShowMenu(!showMenu);  
   const [inputTitle, setInputTitle] = useState(childTitle);  
   
   useEffect(() => {
@@ -78,8 +77,7 @@ const ItemList = ({
     let itemListValue = values.map((item) => {
       
 
-      if (item.id == id) {
-       
+      if (item.id == id) {       
 
         item.inputs.forEach((subItem) => {
           
@@ -93,10 +91,9 @@ const ItemList = ({
             }
           }
         });
-      }
-      // Default case, return initial object
+      }     
       return item;
-      // Update the state
+     
     });
     
     setValues(itemListValue);

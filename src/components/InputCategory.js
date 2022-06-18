@@ -17,10 +17,8 @@ export default function InputCategory({
 
   useEffect(() => {
    setCatName(description)   
-  }, [values])
-
-  // const toggleMenu = () => setShowMenu(!showMenu);
-  console.log("INPUTS PROPS", listItems);
+  }, [values])  
+  
 
   const onClickRemove = () => {
     let filteredData = values.filter((elem) => elem.id !== id);
@@ -81,22 +79,7 @@ export default function InputCategory({
           ))}
         </div>
 
-        <div></div>
-        {/* <ItemList
-          onInputChange={onInputChange}
-          id={id}
-          type={expense}
-          description="Electricity Bills"
-          values={values}
-          setValues={setValues}
-        />{" "} */}
-        {/* <button className={showMenu === false ? "hidden" : "inline mb-4 px-8"}>
-          -
-        </button>
-        <button className={showMenu === false ? "hidden" : "inline mb-4 px-8"}>
-          +
-        </button> */}
-        <div>{console.log("VALUES", values)}</div>
+        <div></div>        
       </div>
     </div>
   );
