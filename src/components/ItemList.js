@@ -122,7 +122,7 @@ const ItemList = ({
             className="border border-2 rounded-r px-4 py-2"
             type="number"
             value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            onChange={(e) => setInputValue(e.target.value[0] === "0" ? e.target.value.substring(1) : e.target.value)}
           />
           <button
             onClick={onClickRemoveItem}
