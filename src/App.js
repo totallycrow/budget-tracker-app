@@ -17,18 +17,6 @@ function App() {
     initialArray
   );
 
-  // useEffect(() => {
-  //   localStorage.setItem(`budgetSum`, JSON.stringify(budgetSum));
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem(`inputIncomes`, JSON.stringify(inputIncomes));
-  // }, []);
-
-  // localStorage.setItem(`${label}`, `${inputValue}`)
-
-  // const [inputExpenses, setInputExpenses] = useState([0, 0]);
-
   const reset = () => {
     const state = [
       {
@@ -65,8 +53,7 @@ function App() {
       },
     ];
     state[0].id = idGenerator();
-    localStorage.setItem(`inputIncomes`, state);
-    console.log("*************************STATE RESET: ", state);
+    localStorage.setItem(`inputIncomes`, state);   
     setInputIncomes(state);
   };
 
@@ -75,8 +62,7 @@ function App() {
       Date.now().toString(36) +
       Math.floor(
         Math.pow(10, 12) + Math.random() * 9 * Math.pow(10, 12)
-      ).toString(36);
-    console.log(numberId);
+      ).toString(36);    
     return numberId;
   };
 
@@ -104,10 +90,9 @@ function App() {
           element.inputs.forEach((subinput) => {
             incomesSum = incomesSum + subinput.value;
           });
-          // incomesSum = incomesSum + element.value;
+
         }
       });
-      // return parseInt(sum);
 
       let budgetValues = {        
         incomes: incomesSum,
@@ -116,17 +101,10 @@ function App() {
       setBudgetSum(budgetValues);
     };
 
-    // setIncomes(calculateSums("income"));
-    // setExpenses(calculateSums("expense"));
 
     calculateSums();
     // eslint-disable-next-line react-hooks/exhaustive-deps    
   }, [inputIncomes]);
-
-  // Listen for incomes and expenses totals change and update total sum
-  // useEffect(() => {
-  //   setTotal(incomes - expenses);
-  // }, [incomes, expenses]);
 
   //************************************************ */
   // OnInputChange definition
@@ -158,12 +136,7 @@ function App() {
             <button className={button} onClick={() => setPage("reports")}>
               Reports
             </button>
-            {/* <button className={button} onClick={() => setPage("food-expenses")}>
-              Food & Personal
-            </button>
-            <button className={button} onClick={() => setPage("savings")}>
-              Savings
-            </button> */}
+
           </div>
         </div>
         <div className="app-body my-4">
@@ -226,12 +199,6 @@ function App() {
               budgetSum={budgetSum}
             />
           </div>
-          {/* <div className={page !== "food-expenses" ? "hidden" : ""}>
-            <FoodExpenses onInputChange={onInputChange} expense={expense} />
-          </div>
-          <div className={page !== "savings" ? "hidden" : ""}>
-            <SavingsExpenses onInputChange={onInputChange} expense={expense} />
-          </div> */}
 
           <div></div>
         </div>
